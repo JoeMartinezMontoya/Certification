@@ -33,4 +33,7 @@ if (!empty($_GET)) {
             echo "La page demandée n'existe pas";
         }
     }
+} else {
+    require_once(ROOT . "controller/Home.php");
+    (new Home())->index();
 }

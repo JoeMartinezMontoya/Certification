@@ -5,3 +5,5 @@
     <h2><a href="articles/show/<?= $article['slug'] ?>"><?= $article['title'] ?></a></h2>
     <p><?= $article['content'] ?></p>
 <?php endforeach; ?>
+
+<a href="articles/new">Créer un article</a>
