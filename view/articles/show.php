@@ -1,3 +1,3 @@
 <h1><?= $article['title'] ?></h1>
-<p><?= $article['title'] ?></p>
+<p><?= $article['content'] ?></p>
 <small><?= $article['created_at'] ?></small>

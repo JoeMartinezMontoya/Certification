@@ -42,34 +42,54 @@ class Articles extends AbstractController
 
             extract($_POST);
 
-            var_dump($title);
             if ($title !== "") {
-
-                $title = htmlspecialchars($title);
-                $title = $this->Article->normalize($title);
-                $slug = str_replace(' ', '-', strtolower($title));
-
+                $min = 2;
+                $max = 40;
+                if (strlen($title) <= $min || strlen($title) >= $max) {
+                    $errors['title'] = "Le titre ne peut contenir moins de $min ou plus de $max caractères";
+                } else {
+                    $title = htmlspecialchars($title);
+                    $slug = $this->Article->slugify($title);
+                }
             } else {
-                $errors['title'] = "Le titre est incorrect";
+                $errors['title'] = "Le titre ne peut être vide";
             }
 
             if ($content !== "") {
 
                 $content = htmlspecialchars($content, ENT_QUOTES);
-
-                if ($content <= 20) {
+                if (strlen($content) <= 20) {
                     $errors['content'] = "Votre contenu doit faire 20 caractères au minimum";
                 }
-
             } else {
                 $errors['content'] = "Le contenu est incorrect";
             }
-
             $created_at = new DateTime();
-            var_dump($content, $slug, $created_at, $errors);
+
+            if (empty($errors)) {
+                $data = [
+                    'title' => $title,
+                    'content' => $content,
+                    'created_at' => $created_at,
+                    'slug' => $slug
+                ];
+                $success = true;
+                try {
+                    $this->Article->insertInto($data);
+                } catch (Exception $e) {
+                    echo "Error" . $e->getMessage();
+                    $success = false;
+                }
+
+                if ($success) {
+                    header("Location: /lab/Certification/articles/show/$slug", false, 301);
+                    exit();
+                }
+
+            } else {
+                var_dump($errors);
+            }
         }
         $this->render('new');
     }
-
-
 }

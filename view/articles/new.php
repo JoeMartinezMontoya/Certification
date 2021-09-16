@@ -1,11 +1,13 @@
 <h1>Nouvel article</h1>
 
-<form action="" method="post">
-    <label for="title"> Titre :
-        <input type="text" name="title" value="<?= $_POST['title'] ?? '' ?>">
-    </label>
-    <label for="content"> Contenu :
-        <input type="text" name="content" value="<?= $_POST['content'] ?? '' ?>">
-    </label>
-    <button type="submit">Envoyer</button>
-</form>
+<div class="wrapper">
+    <form action="" method="post">
+        <label for="title">
+            <input type="text" name="title" class="form-input" value="<?= $_POST['title'] ?? '' ?>" placeholder="Titre de votre article">
+        </label>
+        <label for="content">
+            <textarea name="content" class="form-textarea" placeholder="Contenu de l'article"><?= $_POST['content'] ?? '' ?></textarea>
+        </label>
+        <button type="submit">Envoyer</button>
+    </form>
+</div>

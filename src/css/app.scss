@@ -172,6 +172,24 @@ p {
 }
 
 //ARTICLES
+.form-input {
+  height: 5vh;
+  width: 80vw;
+  border: none;
+  border-radius: 5px;
+  margin: .5rem auto;
+  display: inline-block;
+  background-color: $falling-star;
+}
+
+.form-textarea {
+  height: 50vh;
+  width: 80vw;
+  border: none;
+  border-radius: 5px;
+  background-color: $falling-star;
+}
+
 .crud-bar {
   position: fixed;
   display: flex;

@@ -132,6 +132,24 @@ p {
   text-align: center;
 }
 
+.form-input {
+  height: 5vh;
+  width: 80vw;
+  border: none;
+  border-radius: 5px;
+  margin: 0.5rem auto;
+  display: inline-block;
+  background-color: #cad3c8;
+}
+
+.form-textarea {
+  height: 50vh;
+  width: 80vw;
+  border: none;
+  border-radius: 5px;
+  background-color: #cad3c8;
+}
+
 .crud-bar {
   position: fixed;
   display: flex;
