@@ -1,58 +1,200 @@
-/*GLOBAL*/
+//FONT
+$font-size-base: 62.5%;
+
+//COLORS
+$falling-star: rgb(202, 211, 200);
+$ship-officer: rgb(44, 58, 71);
+$keppel: rgb(88, 177, 159);
+
+//DIMENSIONS
+$menu-button-bar-height: 4px;
+$menu-button-bar-width: $menu-button-bar-height * 8;
+$full-width: 100vw;
+
+//ANIMATIONS
+$transition-04s: all 0.4s ease;
+
+//LAYERS
+$layer1: 1;
+$layer2: 22;
+$layer3: 33;
+
+//GLOBAL
+* {
+  box-sizing: border-box;
+}
+
 html {
-  font-size: 10px; /*62.5%*/
+  font-size: $font-size-base;
+  font-family: sans-serif;
 }
 
-.d-none {
-  display: none;
-}
-
-.d-block {
-  display: block;
-}
-
-/*NAV*/
-#navToggler {
-  position: absolute;
-  height: 50px;
-  width: 50px;
-  background-color: #325;
-  right: 0;
-  top: 0;
-  border-radius: 5px;
-  z-index: 2;
-}
-
-#navLayout {
-  position: absolute;
-  right: 0;
-  top: 0;
+body {
   height: 100vh;
-  width: 100vw;
-  background-color: #000;
-  z-index: 1;
+  width: $full-width;
+  background-image: url("../img/network.png");
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-color: $ship-officer;
 }
 
-#navMenu {
-  display: flex;
-  flex-flow: column;
-  height: 100vh;
-  align-items: center;
-  justify-content: space-around;
+h1, p, small {
+  color: $falling-star;
 }
 
-.navItem {
-  list-style: none;
-  background-color: green;
-}
-
-.navLink {
+a {
+  color: $keppel;
   text-decoration: none;
-  background-color: red;
 }
 
-/*CONTAINER*/
+h1 {
+  margin: 3rem;
+}
 
+p {
+  font-size: 1.4rem;
+}
+
+//NAVIGATION
+.menu-button {
+  width: $menu-button-bar-width;
+  z-index: $layer3;
+  display: block;
+  height: calc(#{$menu-button-bar-height * 3} + #{$menu-button-bar-height * 2});
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__wrapper {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    z-index: $layer3;
+    background-color: transparent;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  &__bar {
+    background-color: $falling-star;
+    height: $menu-button-bar-height;
+    width: $menu-button-bar-width;
+    display: block;
+    position: absolute;
+    transition: $transition-04s;
+
+    &:nth-of-type(2) {
+      top: $menu-button-bar-height * 2;
+    }
+
+    &:nth-of-type(3) {
+      top: $menu-button-bar-height * 4;
+    }
+  }
+
+  //MENU BURGER ANIMATION
+  &.active {
+    .menu-button__bar {
+      transform: translateY(8px) rotate(45deg);
+
+      &:nth-of-type(2) {
+        transform: translateX(2rem);
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      &:nth-of-type(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+}
+
+.menu-overlay {
+  background-color: $ship-officer;
+  height: 100vh;
+  width: $full-width;
+  right: 0;
+  position: fixed;
+  padding: 8rem 2rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: $transition-04s;
+  transform: translateX(100%);
+  z-index: $layer2;
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    color: $falling-star;
+    font-size: 2rem;
+    transition: $transition-04s;
+    position: relative;
+    align-self: center;
+    margin-bottom: 2rem;
+
+    //UNDERLINE
+    &::after {
+      position: absolute;
+      content: "";
+      background-color: $keppel;
+      height: 1.5vh;
+      width: 0;
+      bottom: -20%;
+      left: 25%;
+      transition: $transition-04s;
+    }
+
+    &:hover::after {
+      width: 7.5vw;
+    }
+  }
+}
+
+//CONTENT
 .container {
-  position: absolute;
+  width: $full-width - 20vw;
+  height: auto;
+  padding-top: 5vh;
+  margin: auto;
+  text-align: center;
+}
+
+//ARTICLES
+.crud-bar {
+  position: fixed;
+  display: flex;
+  justify-content: end;
+  bottom: 0;
+  left: 0;
+  padding: 1.5vh 3vh;
+  height: 10vh;
+  width: $full-width;
+}
+
+.crud-button {
+  height: 6.5vh;
+  width: 15vw;
+  background-color: $keppel;
+  border: none;
+  border-radius: 5%;
+  transition: $transition-04s;
+  & i{
+    font-size: 2rem;
+    color: #2c3a47;
+  }
+  &:hover{
+    transform: scale(1.2);
+  }
 }

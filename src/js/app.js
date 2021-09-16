@@ -1,19 +1,12 @@
-window.addEventListener("DOMContentLoaded", (e) => {
+'use strict';
+window.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
 
-    /*MENU NAV TOGGLER*/
-    let i = 0;
-    $('#navToggler').on('click', () => {
-        i++
-        console.log(i);
-        $('#navLayout').toggleClass('d-none');
-
-        if ($('#navLayout').css('display') === 'none') {
-            console.log('hey');
-            $('#navLayout').slideDown("fast");
-        } else {
-            console.log('ho');
-            $('#navLayout').slideUp("fast");
-        }
-    })
+    /*NAV TOGGLE MANAGEMENT*/
+    const menuButton = document.querySelector('.menu-button');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    menuButton.addEventListener('click', function () {
+        menuButton.classList.toggle('active');
+        menuOverlay.classList.toggle('open');
+    });
 });
