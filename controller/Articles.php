@@ -10,6 +10,16 @@ class Articles extends AbstractController
         $this->requireModel("Article");
         $articles = $this->Article->getAll();
 
+        //If the content is too long, add a short sample of the string
+        foreach ($articles as $k => $v) {
+            $tempContent = $v['content'];
+            if (strlen($tempContent) >= 30) {
+                $articles[$k]['excerpt'] = substr($tempContent, 0, 30) . '...';
+            } else {
+                $articles[$k]['excerpt'] = $v['content'];
+            }
+        }
+
         $this->render('index', [
             'articles' => $articles
         ]);
@@ -24,6 +34,9 @@ class Articles extends AbstractController
         $this->requireModel("Article");
         $article = $this->Article->findBySlug($slug);
 
+        //Simplified date
+        $article['created_at'] = date('d/m/Y', strtotime($article['created_at']));
+
         $this->render('show', [
             'article' => $article
         ]);
@@ -33,10 +46,10 @@ class Articles extends AbstractController
     /**
      * Create one article
      */
-    public function new()
+    public function new(): void
     {
+        $content = $title = $created_at = $slug = null;
         if (!empty($_POST)) {
-
             $this->requireModel("Article");
             $errors = [];
 
@@ -45,6 +58,7 @@ class Articles extends AbstractController
             if ($title !== "") {
                 $min = 2;
                 $max = 40;
+
                 if (strlen($title) <= $min || strlen($title) >= $max) {
                     $errors['title'] = "Le titre ne peut contenir moins de $min ou plus de $max caractères";
                 } else {
@@ -56,7 +70,6 @@ class Articles extends AbstractController
             }
 
             if ($content !== "") {
-
                 $content = htmlspecialchars($content, ENT_QUOTES);
                 if (strlen($content) <= 20) {
                     $errors['content'] = "Votre contenu doit faire 20 caractères au minimum";
@@ -64,6 +77,7 @@ class Articles extends AbstractController
             } else {
                 $errors['content'] = "Le contenu est incorrect";
             }
+
             $created_at = new DateTime();
 
             if (empty($errors)) {
@@ -85,7 +99,6 @@ class Articles extends AbstractController
                     header("Location: /lab/Certification/articles/show/$slug", false, 301);
                     exit();
                 }
-
             } else {
                 var_dump($errors);
             }

@@ -3,8 +3,12 @@ $font-size-base: 62.5%;
 
 //COLORS
 $falling-star: rgb(202, 211, 200);
+$falling-star-bg: rgba(202, 211, 200, .8);
+
 $ship-officer: rgb(44, 58, 71);
 $keppel: rgb(88, 177, 159);
+$eye-of-newt: rgb(179, 57, 57);
+$desert: rgb(204, 174, 98);
 
 //DIMENSIONS
 $menu-button-bar-height: 4px;
@@ -54,6 +58,11 @@ h1 {
 
 p {
   font-size: 1.4rem;
+}
+
+small {
+  font-size: .9rem;
+  font-weight: bold;
 }
 
 //NAVIGATION
@@ -157,7 +166,7 @@ p {
     }
 
     &:hover::after {
-      width: 7.5vw;
+      width: 15vw;
     }
   }
 }
@@ -166,12 +175,46 @@ p {
 .container {
   width: $full-width - 20vw;
   height: auto;
-  padding-top: 5vh;
+  padding: 5vh 0;
   margin: auto;
   text-align: center;
 }
 
-//ARTICLES
+//ARTICLES INDEX
+.card {
+  width: 80%;
+  margin: 1rem auto;
+  word-wrap: break-word;
+  background-color: $falling-star-bg;
+  padding: 1rem;
+  border-radius: 5px;
+
+  & h2 a{
+    color: $ship-officer;
+  }
+
+  & p {
+    color: $ship-officer;
+  }
+}
+
+.card-link {
+  height: 4vh;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  color: $keppel;
+  background-color: $ship-officer;
+  padding: .5rem;
+  font-weight: bold;
+}
+
+//ARTICLES SHOW
+.article-wrapper {
+  word-wrap: break-word;
+}
+
+//ARTICLES FORM
 .form-input {
   height: 5vh;
   width: 80vw;
@@ -182,7 +225,8 @@ p {
   background-color: $falling-star;
   font-size: 1.2rem;
   padding-left: 1.5rem;
-  &::placeholder{
+
+  &::placeholder {
     color: $ship-officer;
   }
 }
@@ -195,7 +239,8 @@ p {
   background-color: $falling-star;
   font-size: 1.2rem;
   padding: 1.5rem;
-  &::placeholder{
+
+  &::placeholder {
     color: $ship-officer;
   }
 }
@@ -224,17 +269,24 @@ p {
 
 .crud-button {
   height: 6.5vh;
-  width: 15vw;
-  background-color: $keppel;
+  width: 10vw;
   border: none;
   border-radius: 5%;
   transition: $transition-04s;
-
+  margin: .5rem;
   & i {
     font-size: 2rem;
     color: #2c3a47;
   }
-
+  &.alert {
+    background-color: $eye-of-newt;
+  }
+  &.new {
+    background-color: $keppel;
+  }
+  &.edit {
+    background-color: $desert;
+  }
   &:hover {
     transform: scale(1.2);
   }

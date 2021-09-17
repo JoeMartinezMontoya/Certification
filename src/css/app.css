@@ -34,6 +34,11 @@ p {
   font-size: 1.4rem;
 }
 
+small {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
 .menu-button {
   width: 32px;
   z-index: 33;
@@ -121,15 +126,45 @@ p {
   transition: all 0.4s ease;
 }
 .nav__item:hover::after {
-  width: 7.5vw;
+  width: 15vw;
 }
 
 .container {
   width: 80vw;
   height: auto;
-  padding-top: 5vh;
+  padding: 5vh 0;
   margin: auto;
   text-align: center;
+}
+
+.card {
+  width: 80%;
+  margin: 1rem auto;
+  word-wrap: break-word;
+  background-color: rgba(202, 211, 200, 0.8);
+  padding: 1rem;
+  border-radius: 5px;
+}
+.card h2 a {
+  color: #2c3a47;
+}
+.card p {
+  color: #2c3a47;
+}
+
+.card-link {
+  height: 4vh;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  color: #58b19f;
+  background-color: #2c3a47;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.article-wrapper {
+  word-wrap: break-word;
 }
 
 .form-input {
@@ -184,15 +219,24 @@ p {
 
 .crud-button {
   height: 6.5vh;
-  width: 15vw;
-  background-color: #58b19f;
+  width: 10vw;
   border: none;
   border-radius: 5%;
   transition: all 0.4s ease;
+  margin: 0.5rem;
 }
 .crud-button i {
   font-size: 2rem;
   color: #2c3a47;
+}
+.crud-button.alert {
+  background-color: #b33939;
+}
+.crud-button.new {
+  background-color: #58b19f;
+}
+.crud-button.edit {
+  background-color: #ccae62;
 }
 .crud-button:hover {
   transform: scale(1.2);

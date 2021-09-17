@@ -50,6 +50,7 @@ class Article extends DB
             'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
             'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y'];
         $normalizedText = strtr($subject, $unwanted_array);
+        $normalizedText = trim($normalizedText);
         $normalizedText = str_replace(["'", '"', '|', '`', '~', ' ', "!", '?', '#'], ['-', '-', '-', '-', '-', '-', '', '', ''], $normalizedText);
         return strtolower($normalizedText);
     }
