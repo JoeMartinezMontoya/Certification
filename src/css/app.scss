@@ -180,6 +180,11 @@ p {
   margin: .5rem auto;
   display: inline-block;
   background-color: $falling-star;
+  font-size: 1.2rem;
+  padding-left: 1.5rem;
+  &::placeholder{
+    color: $ship-officer;
+  }
 }
 
 .form-textarea {
@@ -188,6 +193,22 @@ p {
   border: none;
   border-radius: 5px;
   background-color: $falling-star;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  &::placeholder{
+    color: $ship-officer;
+  }
+}
+
+.form-submit {
+  height: 8vh;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  color: $ship-officer;
+  background-color: $keppel;
+  margin-top: 1.5rem;
+  font-weight: bold;
 }
 
 .crud-bar {
@@ -208,11 +229,13 @@ p {
   border: none;
   border-radius: 5%;
   transition: $transition-04s;
-  & i{
+
+  & i {
     font-size: 2rem;
     color: #2c3a47;
   }
-  &:hover{
+
+  &:hover {
     transform: scale(1.2);
   }
 }
