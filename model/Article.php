@@ -16,12 +16,21 @@ class Article extends DB
         return $query->fetch();
     }
 
+    public function findById(string $id)
+    {
+        $sql = "SELECT * FROM {$this->_table} WHERE id = '$id'";
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+
     /**
      * @param array $data
      * @return string|void
      */
     public function insertInto(array $data)
     {
+        $title = $content = $created_at = $slug = null;
         extract($data);
         try {
             $created_at = date_format($created_at, 'Y-m-d H:i:s');
@@ -31,6 +40,29 @@ class Article extends DB
             $query->bindParam(':content', $content, PDO::PARAM_STR);
             $query->bindParam(':created_at', $created_at, PDO::PARAM_STR);
             $query->bindParam(':slug', $slug, PDO::PARAM_STR);
+            $query->execute();
+        } catch (PDOException $e) {
+            return "Error" . $e->getMessage();
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return string|void
+     */
+    public function update(array $data)
+    {
+        $id = $title = $content = $slug = null;
+        extract($data);
+        try {
+            $updated_at = date_format(new DateTime(), 'Y-m-d H:i:s');
+            $sql = "UPDATE articles SET title = :title, content = :content, updated_at = :updated_at, slug = :slug WHERE id = :id";
+            $query = $this->_connexion->prepare($sql);
+            $query->bindParam(':title', $title, PDO::PARAM_STR);
+            $query->bindParam(':content', $content, PDO::PARAM_STR);
+            $query->bindParam(':updated_at', $updated_at, PDO::PARAM_STR);
+            $query->bindParam(':slug', $slug, PDO::PARAM_STR);
+            $query->bindParam(':id', $id, PDO::PARAM_STR);
             $query->execute();
         } catch (PDOException $e) {
             return "Error" . $e->getMessage();

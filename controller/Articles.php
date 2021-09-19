@@ -36,12 +36,14 @@ class Articles extends AbstractController
 
         //Simplified date
         $article['created_at'] = date('d/m/Y', strtotime($article['created_at']));
+        if ($article['updated_at'] !== null) {
+            $article['updated_at'] = date('d/m/Y', strtotime($article['updated_at']));
+        }
 
         $this->render('show', [
             'article' => $article
         ]);
     }
-
 
     /**
      * Create one article
@@ -55,7 +57,7 @@ class Articles extends AbstractController
 
             extract($_POST);
 
-            if ($title !== "") {
+            if ($title !== '') {
                 $min = 2;
                 $max = 40;
 
@@ -69,7 +71,7 @@ class Articles extends AbstractController
                 $errors['title'] = "Le titre ne peut être vide";
             }
 
-            if ($content !== "") {
+            if ($content !== '') {
                 $content = htmlspecialchars($content, ENT_QUOTES);
                 if (strlen($content) <= 20) {
                     $errors['content'] = "Votre contenu doit faire 20 caractères au minimum";
@@ -104,5 +106,72 @@ class Articles extends AbstractController
             }
         }
         $this->render('new');
+    }
+
+    /**
+     * Edit one article
+     */
+    public function edit()
+    {
+        $this->requireModel("Article");
+        [, , , $id] = explode('/', $_GET['p']);
+        $article = $this->Article->findById($id);
+
+        if (!empty($_POST)) {
+            $errors = [];
+
+            extract($_POST);
+
+            if ($title !== '') {
+                $min = 2;
+                $max = 40;
+
+                if (strlen($title) <= $min || strlen($title) >= $max) {
+                    $errors['title'] = "Le titre ne peut contenir moins de $min ou plus de $max caractères";
+                } else {
+                    $title = htmlspecialchars($title);
+                    $slug = $this->Article->slugify($title);
+                }
+            } else {
+                $errors['title'] = "Le titre ne peut être vide";
+            }
+
+            if ($content !== '') {
+                $content = htmlspecialchars($content, ENT_QUOTES);
+                if (strlen($content) <= 20) {
+                    $errors['content'] = "Votre contenu doit faire 20 caractères au minimum";
+                }
+            } else {
+                $errors['content'] = "Le contenu est incorrect";
+            }
+
+            if (empty($errors)) {
+                $data = [
+                    'id' => $id,
+                    'title' => $title,
+                    'content' => $content,
+                    'slug' => $slug
+                ];
+
+                $success = true;
+                try {
+                    $this->Article->update($data);
+                } catch (Exception $e) {
+                    echo "Error" . $e->getMessage();
+                    $success = false;
+                }
+
+                if ($success) {
+                    header("Location: /lab/Certification/articles/show/$slug", false, 301);
+                    exit();
+                }
+            }else{
+                var_dump($errors);
+            }
+        }
+
+        $this->render('edit', [
+            'article' => $article
+        ]);
     }
 }

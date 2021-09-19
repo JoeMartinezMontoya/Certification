@@ -2,6 +2,9 @@
     <h1><?= $article['title'] ?></h1>
     <p><?= $article['content'] ?></p>
     <small>Publié le <?= $article['created_at'] ?></small>
+    <?php if ($article['updated_at'] !== null): ?>
+        <small>|| Modifié le <?= $article['updated_at'] ?></small>
+    <?php endif ?>
 </div>
 <div class="crud-bar">
     <button class="crud-button alert" title="delete">
@@ -10,7 +13,7 @@
         </a>
     </button>
     <button class="crud-button edit">
-        <a href="#" title="edition">
+        <a href="articles/edit/<?= $article['slug'] . '/' . $article['id'] ?>" title="edition">
             <i class="fas fa-pen"></i>
         </a>
     </button>
