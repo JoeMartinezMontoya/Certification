@@ -174,4 +174,22 @@ class Articles extends AbstractController
             'article' => $article
         ]);
     }
+
+    /**
+     * Delete one article
+     */
+    public function delete()
+    {
+        [ , , $id] = explode('/', $_GET['p']);
+        $this->requireModel("Article");
+        $article = $this->Article->findById($id);
+        $errors = [];
+        if (!$article) {
+            $errors[] = "Cet article n'existe pas";
+        }else{
+            $this->Article->deleteById($id);
+            header("Location: /lab/Certification/articles", false, 301);
+            exit();
+        }
+    }
 }

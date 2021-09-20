@@ -8,7 +8,7 @@
 </div>
 <div class="crud-bar">
     <button class="crud-button alert" title="delete">
-        <a href="#">
+        <a href="articles/delete/<?= $article['id'] ?>">
             <i class="fas fa-trash"></i>
         </a>
     </button>

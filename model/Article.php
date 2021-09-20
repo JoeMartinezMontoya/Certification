@@ -69,6 +69,18 @@ class Article extends DB
         }
     }
 
+    public function deleteById(string $id)
+    {
+        $sql = "DELETE FROM articles WHERE id = :id";
+        try {
+            $query = $this->_connexion->prepare($sql);
+            $query->bindParam(':id', $id, PDO::PARAM_STR);
+            $query->execute();
+        } catch (PDOException $e) {
+            return "Error" . $e->getMessage();
+        }
+    }
+
     /**
      * Turns a string into a slug
      * @param string $subject
