@@ -65,6 +65,40 @@ small {
   font-weight: bold;
 }
 
+.nav-bottom {
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+}
+
+.btn {
+  font-size: 14px;
+  padding: 6px 12px;
+  margin: 0 15px 0 0;
+
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: $keppel;
+  color: $ship-officer;
+  font-weight: bold;
+}
+
 //NAVIGATION
 .menu-button {
   width: $menu-button-bar-width;
@@ -189,7 +223,7 @@ small {
   padding: 1rem;
   border-radius: 5px;
 
-  & h2 a{
+  & h2 a {
     color: $ship-officer;
   }
 
@@ -274,19 +308,24 @@ small {
   border-radius: 5%;
   transition: $transition-04s;
   margin: .5rem;
+
   & i {
     font-size: 2rem;
     color: #2c3a47;
   }
+
   &.alert {
     background-color: $eye-of-newt;
   }
+
   &.new {
     background-color: $keppel;
   }
+
   &.edit {
     background-color: $desert;
   }
+
   &:hover {
     transform: scale(1.2);
   }

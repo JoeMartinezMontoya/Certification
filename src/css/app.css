@@ -39,6 +39,39 @@ small {
   font-weight: bold;
 }
 
+.nav-bottom {
+  position: absolute;
+  bottom: 5%;
+  left: 35%;
+}
+
+.btn {
+  font-size: 14px;
+  padding: 6px 12px;
+  margin: 0 15px 0 0;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #58b19f;
+  color: #2c3a47;
+  font-weight: bold;
+}
+
 .menu-button {
   width: 32px;
   z-index: 33;

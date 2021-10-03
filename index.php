@@ -13,7 +13,7 @@ require_once(ROOT . "app/AbstractController.php");
 //URL TREATMENT
 if (!empty($_GET)) {
     $params = explode('/', $_GET['p']);
-//var_dump($params);
+
     if ($params[0] !== "") {
 
         $controller = ucfirst($params[0]);

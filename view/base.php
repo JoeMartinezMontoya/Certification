@@ -33,6 +33,10 @@
             <a class="nav__item" href="">Accueil</a>
             <a class="nav__item" href="articles">Articles</a>
         </nav>
+        <div class="nav-bottom">
+            <a href="users/register" class="btn btn-primary">S'inscrire</a>
+            <a href="users/login" class="btn btn-primary">Se connecter</a>
+        </div>
     </div>
 </header>
 <!--CONTENT-->
