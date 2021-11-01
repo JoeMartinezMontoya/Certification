@@ -34,8 +34,12 @@
             <a class="nav__item" href="articles">Articles</a>
         </nav>
         <div class="nav-bottom">
-            <a href="users/register" class="btn btn-primary">S'inscrire</a>
-            <a href="users/login" class="btn btn-primary">Se connecter</a>
+            <?php if (isset($_SESSION) && !empty($_SESSION)): ?>
+                <a href="users/logout" class="btn btn-primary">Se déconnecter</a>
+            <?php else: ?>
+                <a href="users/register" class="btn btn-primary">S'inscrire</a>
+                <a href="users/login" class="btn btn-primary">Se connecter</a>
+            <?php endif ?>
         </div>
     </div>
 </header>

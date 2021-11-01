@@ -7,7 +7,6 @@ class Users extends AbstractController
      */
     public function register()
     {
-        var_dump($_POST);
         if (!empty($_POST)) {
             $username = $password = $mail = $confirm_password = "";
             $errors = [];
@@ -66,5 +65,39 @@ class Users extends AbstractController
             }
         }
         $this->render('register');
+    }
+
+    public function login()
+    {
+        if (!empty($_POST)) {
+            $mail = $password = "";
+            $errors = [];
+
+            extract($_POST);
+
+            $this->requireModel("User");
+
+            if (trim($mail) !== "" && filter_var($mail, FILTER_VALIDATE_EMAIL) !== false) {
+                $user = $this->User->findByMail($mail);
+            } else {
+                $errors['mail'] = "Mail invalide";
+            }
+
+            if (password_verify($password, $user['password']) === true) {
+                session_start();
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['mail'] = $user['mail'];
+                $_SESSION['username'] = $user['username'];
+
+                header("Location: /lab/Certification/", false, 301);
+                exit();
+            }
+        }
+        $this->render('login');
+    }
+
+    public function logout()
+    {
+        $this->render('logout');
     }
 }
