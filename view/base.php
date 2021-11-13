@@ -32,6 +32,9 @@
             <!--LINKS-->
             <a class="nav__item" href="">Accueil</a>
             <a class="nav__item" href="articles">Articles</a>
+            <?php if (isset($_SESSION) && !empty($_SESSION)): ?>
+                <a class="nav__item" href="articles/user_index">Mes articles</a>
+            <?php endif ?>
         </nav>
         <div class="nav-bottom">
             <?php if (isset($_SESSION) && !empty($_SESSION)): ?>

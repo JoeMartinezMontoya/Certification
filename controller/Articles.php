@@ -26,6 +26,29 @@ class Articles extends AbstractController
     }
 
     /**
+     * Listing of all the current user articles
+     */
+    public function user_index()
+    {
+        $this->requireModel("Article");
+        $articles = $this->Article->findAllById((int)$_SESSION['id']);
+
+        //If the content is too long, add a short sample of the string
+        foreach ($articles as $k => $v) {
+            $tempContent = $v['content'];
+            if (strlen($tempContent) >= 30) {
+                $articles[$k]['excerpt'] = substr($tempContent, 0, 30) . '...';
+            } else {
+                $articles[$k]['excerpt'] = $v['content'];
+            }
+        }
+
+        $this->render('user_index', [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
      * Display one specific article
      * @param string $slug
      */
@@ -50,7 +73,7 @@ class Articles extends AbstractController
      */
     public function new(): void
     {
-        $content = $title = $created_at = $slug = null;
+        $content = $title = $created_at = $slug = $author_id = null;
         if (!empty($_POST)) {
             $this->requireModel("Article");
             $errors = [];
@@ -81,13 +104,15 @@ class Articles extends AbstractController
             }
 
             $created_at = new DateTime();
+            $author_id = $_SESSION['id'];
 
             if (empty($errors)) {
                 $data = [
                     'title' => $title,
                     'content' => $content,
                     'created_at' => $created_at,
-                    'slug' => $slug
+                    'slug' => $slug,
+                    'author_id' => $author_id
                 ];
                 $success = true;
                 try {

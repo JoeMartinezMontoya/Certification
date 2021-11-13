@@ -24,22 +24,34 @@ class Article extends DB
         return $query->fetch();
     }
 
+    public function findAllById(int $id)
+    {
+        $sql = "SELECT * FROM {$this->_table} WHERE author_id = '$id'";
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
     /**
      * @param array $data
      * @return string|void
      */
     public function insertInto(array $data)
     {
-        $title = $content = $created_at = $slug = null;
+        $title = $content = $created_at = $slug = $author_id = null;
         extract($data);
         try {
             $created_at = date_format($created_at, 'Y-m-d H:i:s');
-            $sql = "INSERT INTO articles (title, content, created_at, slug) VALUES (:title, :content, :created_at, :slug)";
+            $sql = "
+INSERT INTO articles (title, content, created_at, slug, author_id) 
+VALUES (:title, :content, :created_at, :slug, :author_id)
+";
             $query = $this->_connexion->prepare($sql);
             $query->bindParam(':title', $title, PDO::PARAM_STR);
             $query->bindParam(':content', $content, PDO::PARAM_STR);
             $query->bindParam(':created_at', $created_at, PDO::PARAM_STR);
             $query->bindParam(':slug', $slug, PDO::PARAM_STR);
+            $query->bindParam(':author_id', $author_id, PDO::PARAM_INT);
             $query->execute();
         } catch (PDOException $e) {
             return "Error" . $e->getMessage();

@@ -6,15 +6,17 @@
         <small>|| Modifié le <?= $article['updated_at'] ?></small>
     <?php endif ?>
 </div>
-<div class="crud-bar">
-    <button class="crud-button alert" title="delete">
-        <a href="articles/delete/<?= $article['id'] ?>">
-            <i class="fas fa-trash"></i>
-        </a>
-    </button>
-    <button class="crud-button edit">
-        <a href="articles/edit/<?= $article['slug'] . '/' . $article['id'] ?>" title="edition">
-            <i class="fas fa-pen"></i>
-        </a>
-    </button>
-</div>
+<?php if ((int)$_SESSION['id'] === (int)$article['author_id']): ?>
+    <div class="crud-bar">
+        <button class="crud-button alert" title="delete">
+            <a href="articles/delete/<?= $article['id'] ?>">
+                <i class="fas fa-trash"></i>
+            </a>
+        </button>
+        <button class="crud-button edit">
+            <a href="articles/edit/<?= $article['slug'] . '/' . $article['id'] ?>" title="edition">
+                <i class="fas fa-pen"></i>
+            </a>
+        </button>
+    </div>
+<?php endif ?>
