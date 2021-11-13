@@ -10,16 +10,7 @@ class Articles extends AbstractController
         $this->requireModel("Article");
         $articles = $this->Article->getAll();
 
-        //If the content is too long, add a short sample of the string
-        foreach ($articles as $k => $v) {
-            $tempContent = $v['content'];
-            if (strlen($tempContent) >= 30) {
-                $articles[$k]['excerpt'] = substr($tempContent, 0, 30) . '...';
-            } else {
-                $articles[$k]['excerpt'] = $v['content'];
-            }
-        }
-
+        $articles = $this->getExcerpt($articles);
         $this->render('index', [
             'articles' => $articles
         ]);
@@ -33,16 +24,7 @@ class Articles extends AbstractController
         $this->requireModel("Article");
         $articles = $this->Article->findAllById((int)$_SESSION['id']);
 
-        //If the content is too long, add a short sample of the string
-        foreach ($articles as $k => $v) {
-            $tempContent = $v['content'];
-            if (strlen($tempContent) >= 30) {
-                $articles[$k]['excerpt'] = substr($tempContent, 0, 30) . '...';
-            } else {
-                $articles[$k]['excerpt'] = $v['content'];
-            }
-        }
-
+        $articles = $this->getExcerpt($articles);
         $this->render('user_index', [
             'articles' => $articles
         ]);
@@ -190,7 +172,7 @@ class Articles extends AbstractController
                     header("Location: /lab/Certification/articles/show/$slug", false, 301);
                     exit();
                 }
-            }else{
+            } else {
                 var_dump($errors);
             }
         }
@@ -205,16 +187,35 @@ class Articles extends AbstractController
      */
     public function delete()
     {
-        [ , , $id] = explode('/', $_GET['p']);
+        [, , $id] = explode('/', $_GET['p']);
         $this->requireModel("Article");
         $article = $this->Article->findById($id);
         $errors = [];
         if (!$article) {
             $errors[] = "Cet article n'existe pas";
-        }else{
+        } else {
             $this->Article->deleteById($id);
             header("Location: /lab/Certification/articles", false, 301);
             exit();
         }
+    }
+
+    /**
+     * Make an excerpt from the article content
+     * @param $articles
+     * @return array
+     */
+    public function getExcerpt($articles): array
+    {
+        //If the content is too long, add a short sample of the string
+        foreach ($articles as $k => $v) {
+            $tempContent = $v['content'];
+            if (strlen($tempContent) >= 30) {
+                $articles[$k]['excerpt'] = substr($tempContent, 0, 30) . '...';
+            } else {
+                $articles[$k]['excerpt'] = $v['content'];
+            }
+        }
+        return $articles;
     }
 }
