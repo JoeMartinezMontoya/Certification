@@ -52,15 +52,15 @@ class User extends DB
      */
     public function update(array $data)
     {
-        $username = $password = $id = null;
+        $username = $id = $role = null;
         extract($data);
         try {
             $updated_at = date_format(new DateTime(), 'Y-m-d H:i:s');
-            $sql = "UPDATE users SET username = :username, password = :password WHERE id = :id";
+            $sql = "UPDATE users SET username = :username, ref_role_id = :role WHERE id = :id";
             $query = $this->_connexion->prepare($sql);
             $query->bindParam(':username', $username, PDO::PARAM_STR);
-            $query->bindParam(':password', $password, PDO::PARAM_STR);
             $query->bindParam(':id', $id, PDO::PARAM_STR);
+            $query->bindParam(':role', $role, PDO::PARAM_INT);
             $query->execute();
         } catch (PDOException $e) {
             return "Error" . $e->getMessage();

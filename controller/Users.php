@@ -88,6 +88,7 @@ class Users extends AbstractController
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['mail'] = $user['mail'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['role'] = (int)$user['ref_role_id'];
 
                 header("Location: /lab/Certification/", false, 301);
                 exit();

@@ -72,6 +72,14 @@ small {
   font-weight: bold;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.row {
+  flex-flow: row wrap;
+}
+
 .menu-button {
   width: 32px;
   z-index: 33;
@@ -252,7 +260,7 @@ small {
 
 .crud-button {
   height: 6.5vh;
-  width: 10vw;
+  width: 8.5vw;
   border: none;
   border-radius: 5%;
   transition: all 0.4s ease;
@@ -273,6 +281,46 @@ small {
 }
 .crud-button:hover {
   transform: scale(1.2);
+}
+
+.bubble {
+  margin: 0.5rem;
+  width: 45%;
+  height: 30vh;
+  border-radius: 5%;
+  color: #2c3a47;
+  background-color: #ccae62;
+  transition: all 0.4s ease;
+}
+.bubble:hover {
+  color: #58b19f;
+  background-color: rgba(44, 58, 71, 0.9);
+}
+.bubble:hover .counter {
+  color: #58b19f;
+}
+
+.counter {
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+.dashboard-table {
+  color: #58b19f;
+  font-weight: bolder;
+  margin: auto;
+}
+.dashboard-table tr:nth-of-type(odd) {
+  background-color: rgba(44, 58, 71, 0.9);
+}
+.dashboard-table tr:nth-of-type(even) {
+  background-color: rgba(202, 211, 200, 0.8);
+  color: #2c3a47;
+}
+
+.form-p {
+  margin: 0.5rem;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=app.css.map */

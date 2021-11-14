@@ -6,6 +6,7 @@ $falling-star: rgb(202, 211, 200);
 $falling-star-bg: rgba(202, 211, 200, .8);
 
 $ship-officer: rgb(44, 58, 71);
+$ship-officer-t: rgba(44, 58, 71, .9);
 $keppel: rgb(88, 177, 159);
 $eye-of-newt: rgb(179, 57, 57);
 $desert: rgb(204, 174, 98);
@@ -97,6 +98,14 @@ small {
   background-color: $keppel;
   color: $ship-officer;
   font-weight: bold;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.row {
+  flex-flow: row wrap;
 }
 
 //NAVIGATION
@@ -303,7 +312,7 @@ small {
 
 .crud-button {
   height: 6.5vh;
-  width: 10vw;
+  width: 8.5vw;
   border: none;
   border-radius: 5%;
   transition: $transition-04s;
@@ -329,4 +338,49 @@ small {
   &:hover {
     transform: scale(1.2);
   }
+}
+
+//ADMIN
+.bubble {
+  margin: .5rem;
+  width: 45%;
+  height: 30vh;
+  border-radius: 5%;
+  color: $ship-officer;
+  background-color: $desert;
+  transition: $transition-04s;
+
+  &:hover {
+    color: $keppel;
+    background-color: $ship-officer-t;
+  }
+
+  &:hover .counter {
+    color: $keppel;
+  }
+}
+
+.counter {
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+.dashboard-table {
+  color: $keppel;
+  font-weight: bolder;
+  margin: auto;
+
+  tr:nth-of-type(odd) {
+    background-color: $ship-officer-t;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: $falling-star-bg;
+    color: $ship-officer;
+  }
+}
+
+.form-p {
+  margin: .5rem;
+  display: inline-block;
 }

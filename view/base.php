@@ -34,6 +34,9 @@
             <a class="nav__item" href="articles">Articles</a>
             <?php if (isset($_SESSION) && !empty($_SESSION)): ?>
                 <a class="nav__item" href="articles/user_index">Mes articles</a>
+                <?php if ($_SESSION['role'] === 2) : ?>
+                    <a class="nav__item" href="admin">Panneau de contrôle</a>
+                <?php endif ?>
             <?php endif ?>
         </nav>
         <div class="nav-bottom">
